@@ -1,9 +1,11 @@
 package com.buenoezandro.users.service.impl;
 
+import com.buenoezandro.users.mapper.AddressMapper;
 import com.buenoezandro.users.mapper.UserMapper;
 import com.buenoezandro.users.model.UserModel;
 import com.buenoezandro.users.model.dto.UserModelDTO;
 import com.buenoezandro.users.repository.UserRepository;
+import com.buenoezandro.users.service.AddressService;
 import com.buenoezandro.users.service.UserService;
 import com.buenoezandro.users.service.exception.UserNotFoundException;
 import lombok.RequiredArgsConstructor;
@@ -17,6 +19,8 @@ import java.util.List;
 public class UserServiceImpl implements UserService {
     private final UserRepository userRepository;
     private final UserMapper userMapper;
+    private final AddressService addressService;
+    private final AddressMapper addressMapper;
 
     @Transactional(readOnly = true)
     @Override
@@ -34,9 +38,14 @@ public class UserServiceImpl implements UserService {
 
     @Transactional
     @Override
-    public UserModelDTO create(UserModel userModel) {
-        var user = this.userRepository.save(userModel);
-        return this.userMapper.fromModelToDTO(user);
+    public UserModelDTO create(Integer address_id, UserModel userModel) {
+        var addressDTO = this.addressService.findById(address_id);
+        var address = this.addressMapper.fromDTOToModel(addressDTO);
+
+        userModel.setAddress(address);
+        userModel = this.userRepository.save(userModel);
+
+        return this.userMapper.fromModelToDTO(userModel);
     }
 
     @Transactional

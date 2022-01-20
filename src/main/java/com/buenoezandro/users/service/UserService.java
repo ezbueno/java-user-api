@@ -10,7 +10,7 @@ public interface UserService {
 
     UserModelDTO findById(Integer id);
 
-    UserModelDTO create(UserModel userModel);
+    UserModelDTO create(Integer address_id, UserModel userModel);
 
     void update(Integer id, UserModel userModel);
 
