@@ -14,9 +14,14 @@
 - Maven
 - Tomcat
 
-# Create new requests
+# Create new requests - Address
+- GET - Get Address By ID: http://localhost:8080/address/1
+- POST - Create Address: http://localhost:8080/address/create
+- PUT - Update Address: http://localhost:8080/address/update/1
+
+# Create new requests - User
 - GET - Get All Users: http://localhost:8080/users
 - GET - Get User By ID: http://localhost:8080/users/1
-- POST - Create User: http://localhost:8080/users/create
+- POST - Create User: http://localhost:8080/users/create?address=1
 - PUT - Update User: http://localhost:8080/users/update/1
 - DELETE - Delete User: http://localhost:8080/users/delete/1
