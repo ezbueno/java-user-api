@@ -3,6 +3,7 @@ package com.buenoezandro.users.service.impl;
 import com.buenoezandro.users.mapper.AddressMapper;
 import com.buenoezandro.users.mapper.UserMapper;
 import com.buenoezandro.users.model.UserModel;
+import com.buenoezandro.users.model.dto.AddressDTO;
 import com.buenoezandro.users.model.dto.UserModelDTO;
 import com.buenoezandro.users.repository.UserRepository;
 import com.buenoezandro.users.service.AddressService;
@@ -13,6 +14,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+
+import static java.util.Objects.requireNonNull;
 
 @RequiredArgsConstructor
 @Service
@@ -39,7 +42,9 @@ public class UserServiceImpl implements UserService {
     @Transactional
     @Override
     public UserModelDTO create(Integer address_id, UserModel userModel) {
-        var addressDTO = this.addressService.findById(address_id);
+        requireNonNull(address_id);
+
+        var addressDTO = this.findByIdOrElseThrow(address_id);
         var address = this.addressMapper.fromDTOToModel(addressDTO);
 
         userModel.setAddress(address);
@@ -65,5 +70,11 @@ public class UserServiceImpl implements UserService {
     public void delete(Integer id) {
         this.findById(id);
         this.userRepository.deleteById(id);
+    }
+
+    private AddressDTO findByIdOrElseThrow(Integer id) {
+        requireNonNull(id);
+        var addressDTO = this.addressService.findById(id);
+        return addressDTO;
     }
 }

@@ -1,7 +1,7 @@
 package com.buenoezandro.users.service.exception;
 
-public class UserNotFoundException extends RuntimeException {
-    public UserNotFoundException(Integer id) {
-        super(String.format("User not found! ID: %s", id));
+public class AddressNotFoundException extends RuntimeException {
+    public AddressNotFoundException(Integer id) {
+        super(String.format("Address not found! ID: %s", id));
     }
 }

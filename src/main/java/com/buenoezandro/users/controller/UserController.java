@@ -30,8 +30,8 @@ public class UserController {
 
     @PostMapping(path = "/create")
     public ResponseEntity<UserModelDTO> create(
-        @RequestParam(value = "address", defaultValue = "0") Integer address_id,
-        @Valid @RequestBody UserModel userModel
+            @RequestParam(value = "address", defaultValue = "0") Integer address_id,
+            @Valid @RequestBody UserModel userModel
     ) {
         var userModelDTO = this.userService.create(address_id, userModel);
         var uri = ServletUriComponentsBuilder.fromCurrentContextPath().path("/users/{id}").buildAndExpand(userModelDTO.getId()).toUri();

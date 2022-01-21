@@ -17,7 +17,7 @@ import java.io.Serializable;
 public class UserModel implements Serializable {
     @EqualsAndHashCode.Include
     @Id
-    @GeneratedValue(strategy= GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
     @NotBlank
@@ -29,7 +29,7 @@ public class UserModel implements Serializable {
     @NotNull
     private Integer age;
 
-    @OneToOne(fetch = FetchType.LAZY)
+    @OneToOne(fetch = FetchType.LAZY, orphanRemoval = true)
     @JoinColumn(name = "address_id")
     private Address address;
 }

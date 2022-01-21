@@ -1,5 +1,6 @@
 package com.buenoezandro.users.controller.exception;
 
+import com.buenoezandro.users.service.exception.AddressNotFoundException;
 import com.buenoezandro.users.service.exception.UserNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -19,6 +20,12 @@ public class ResourceExceptionHandler {
 
     @ExceptionHandler(value = UserNotFoundException.class)
     private ResponseEntity<StandardError> userNotFoundException(UserNotFoundException e) {
+        var error = new StandardError(LocalDateTime.now(), HttpStatus.NOT_FOUND.value(), e.getMessage());
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(error);
+    }
+
+    @ExceptionHandler(value = AddressNotFoundException.class)
+    private ResponseEntity<StandardError> addressNotFoundException(AddressNotFoundException e) {
         var error = new StandardError(LocalDateTime.now(), HttpStatus.NOT_FOUND.value(), e.getMessage());
         return ResponseEntity.status(HttpStatus.NOT_FOUND).body(error);
     }

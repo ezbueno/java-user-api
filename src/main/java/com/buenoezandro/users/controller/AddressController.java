@@ -4,6 +4,7 @@ import com.buenoezandro.users.model.Address;
 import com.buenoezandro.users.model.dto.AddressDTO;
 import com.buenoezandro.users.service.AddressService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
@@ -19,10 +20,16 @@ public class AddressController {
         return this.addressService.findById(address_id);
     }
 
-    @PostMapping()
+    @PostMapping(path = "/create")
     public ResponseEntity<AddressDTO> create(@RequestBody Address address) {
         var addressDTO = this.addressService.create(address);
         var uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(addressDTO.getId()).toUri();
         return ResponseEntity.created(uri).body(addressDTO);
+    }
+
+    @ResponseStatus(code = HttpStatus.NO_CONTENT)
+    @PutMapping(path = "/update/{id}")
+    public void update(@PathVariable(value = "id") Integer id, @RequestBody Address address) {
+        this.addressService.update(id, address);
     }
 }

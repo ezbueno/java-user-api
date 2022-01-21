@@ -7,4 +7,6 @@ public interface AddressService {
     AddressDTO findById(Integer address_id);
 
     AddressDTO create(Address address);
+
+    void update(Integer id, Address address);
 }
