@@ -12,6 +12,7 @@
 - H2 Database
 - IntelliJ IDEA
 - Maven
+- Swagger
 - Tomcat
 
 # Create new requests - Address
@@ -25,3 +26,6 @@
 - POST - Create User: http://localhost:8080/users/create?address=1
 - PUT - Update User: http://localhost:8080/users/update/1
 - DELETE - Delete User: http://localhost:8080/users/delete/1
+
+# Localhost - Swagger
+- http://localhost:8080/swagger-ui.html
