@@ -2,7 +2,6 @@ package com.buenoezandro.users.controller.exception;
 
 import com.buenoezandro.users.service.exception.AddressNotFoundException;
 import com.buenoezandro.users.service.exception.UserNotFoundException;
-import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.MethodArgumentNotValidException;
@@ -12,7 +11,6 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 import javax.validation.ConstraintViolationException;
 import java.time.LocalDateTime;
 
-@RequiredArgsConstructor
 @RestControllerAdvice
 public class ResourceExceptionHandler {
     private static final String MESSAGE = "Erro na validação dos campos!";
