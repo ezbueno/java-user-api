@@ -15,7 +15,6 @@ import java.time.LocalDateTime;
 @RequiredArgsConstructor
 @RestControllerAdvice
 public class ResourceExceptionHandler {
-
     private static final String MESSAGE = "Erro na validação dos campos!";
 
     @ExceptionHandler(value = UserNotFoundException.class)
@@ -36,7 +35,7 @@ public class ResourceExceptionHandler {
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(error);
     }
 
-    @ExceptionHandler(MethodArgumentNotValidException.class)
+    @ExceptionHandler(value = MethodArgumentNotValidException.class)
     private ResponseEntity<StandardError> validationError(MethodArgumentNotValidException e) {
         var error = new ValidationError(LocalDateTime.now(), HttpStatus.BAD_REQUEST.value(), MESSAGE);
 
